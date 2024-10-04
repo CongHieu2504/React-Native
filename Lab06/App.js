@@ -1,126 +1,187 @@
-import React from 'react';
+import React from "react";
 import {
-  SafeAreaView,
   View,
-  FlatList,
-  StyleSheet,
   Text,
-  TouchableOpacity,
+  FlatList,
   Image,
-  StatusBar,
-} from 'react-native';
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 
-// Dữ liệu giả lập các sản phẩm, sử dụng require để lấy ảnh cục bộ
 const DATA = [
   {
-    id: '1',
-    title: 'Ca nấu lẩu, nấu mì mini',
-    shop: 'Shop Devang',
-    imageUrl: require('./assets/images/image1.png'),  // Ảnh cục bộ
+    id: "1",
+    image: require("./img/ca_nau_lau.png"), // replace with your image URL
+    name: "Ca nấu lẩu, nấu mì mini",
+    shop: "Shop Devang",
   },
   {
-    id: '2',
-    title: '1KG KHÔ GÀ BƠ TỎI',
-    shop: 'Shop LTD Food',
-    imageUrl: require('./assets/images/image2.png'),  // Ảnh cục bộ
+    id: "2",
+    image: require("./img/ga_bo_toi.png"),
+    name: "1KG KHÔ GÀ BƠ TỎI",
+    shop: "Shop LTD Food",
   },
   {
-    id: '3',
-    title: 'Xe cần cẩu đa năng',
-    shop: 'Shop Thế giới đồ chơi',
-    imageUrl: require('./assets/images/image3.png'),  // Ảnh cục bộ
+    id: "3",
+    image: require("./img/xa_can_cau.png"),
+    name: "Xe cần cẩu đa năng",
+    shop: "Thế giới đồ chơi",
   },
   {
-    id: '4',
-    title: 'Đồ chơi dạng mô hình',
-    shop: 'Shop Thế giới đồ chơi',
-    imageUrl: require('./assets/images/image4.png'),  // Ảnh cục bộ
+    id: "4",
+    image: require("./img/do_choi_dang_mo_hinh.png"),
+    name: "Đồ chơi dạng mô hình",
+    shop: "Thế giới đồ chơi",
   },
   {
-    id: '5',
-    title: 'Lãnh đạo giản đơn',
-    shop: 'Shop Minh Long Book',
-    imageUrl: require('./assets/images/image5.png'),  // Ảnh cục bộ
+    id: "5",
+    image: require("./img/lanh_dao_gian_don.png"),
+    name: "Lãnh đạo giản đơn",
+    shop: "Minh Long Book",
   },
   {
-    id: '6',
-    title: 'Hiểu lòng con trẻ',
-    shop: 'Shop Minh Long Book',
-    imageUrl: require('./assets/images/image6.png'),  // Ảnh cục bộ
+    id: "6",
+    image: require("./img/hieu_long_con_tre.png"),
+    name: "Hiểu lòng con trẻ",
+    shop: "Minh Long Book",
+  },
+  {
+    id: "7",
+    image: require("./img/trump.png"),
+    name: "Donald Trump: Thiên tài lãnh đạo",
+    shop: "Minh Long Book",
   },
 ];
 
-// Component Item để hiển thị từng sản phẩm
-const Item = ({title, shop, imageUrl}) => (
-  <View style={styles.item}>
-    <Image source={imageUrl} style={styles.image} />
-    <View style={styles.infoContainer}>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.shop}>{shop}</Text>
-    </View>
-    <TouchableOpacity style={styles.chatButton}>
-      <Text style={styles.chatButtonText}>Chat</Text>
-    </TouchableOpacity>
-  </View>
-);
-
 const App = () => {
+  const navbar = (
+    <View>
+      <View
+        style={{
+          backgroundColor: "#1BA9FF",
+          marginTop: 30,
+          alignItems: "center",
+          paddingHorizontal: 30,
+          height: 42,
+          justifyContent: "space-between",
+          flexDirection: "row",
+        }}
+      >
+        <Image
+          source={require("./img/back-arrow.png")}
+          style={styles.imageicon}
+        ></Image>
+        <Text style={{ color: "white", fontSize: 23 }}>Chat</Text>
+        <Image
+          source={require("./img/shopping-cart.png")}
+          style={styles.imageicon}
+        ></Image>
+      </View>
+      <View style={{ alignItems: "center", justifyContent: "center" }}>
+        <Text style={{ color: "black", fontSize: 15, padding: 10 }}>
+          Bạn có thắc mắc với sản phẩm vừa xem đừng ngại chát với shop!
+        </Text>
+      </View>
+    </View>
+  );
+  const footer = (
+    <View>
+      <View
+        style={{
+          backgroundColor: "#1BA9FF",
+          alignItems: "center",
+          paddingHorizontal: 30,
+          height: 42,
+          justifyContent: "space-between",
+          flexDirection: "row",
+        }}
+      >
+        <Image
+          source={require("./img/more.png")}
+          style={styles.imageicon}
+        ></Image>
+        <Image
+          source={require("./img/interface.png")}
+          style={styles.imageicon}
+        ></Image>
+        <Image
+          source={require("./img/1.png")}
+          style={styles.imageicon}
+        ></Image>
+      </View>
+    </View>
+  );
+  const renderItem = ({ item }) => (
+    <View style={styles.itemContainer}>
+      <Image source={item.image} style={styles.image} />
+      <View style={styles.textContainer}>
+        <Text style={styles.productName}>{item.name}</Text><Text style={styles.shopName}>{item.shop}</Text>
+      </View>
+      <TouchableOpacity style={styles.chatButton}>
+        <Text style={styles.chatText}>Chat</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
+      {navbar}
       <FlatList
         data={DATA}
-        renderItem={({item}) => (
-          <Item title={item.title} shop={item.shop} imageUrl={item.imageUrl} />
-        )}
-        keyExtractor={item => item.id}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
       />
-    </SafeAreaView>
+      {footer}
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    backgroundColor: "#fff",
+    //paddingHorizontal: 10,
   },
-  item: {
-    flexDirection: 'row',
-    backgroundColor: '#fff',
+  itemContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 5,
     padding: 10,
-    marginVertical: 8,
-    marginHorizontal: 16,
-    alignItems: 'center',
-    borderRadius: 5,
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: "#ddd",
+    borderRadius: 10,
+    backgroundColor: "#fff",
   },
   image: {
     width: 60,
     height: 60,
     borderRadius: 5,
   },
-  infoContainer: {
-    flex: 1,
-    paddingLeft: 10,
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  shop: {
-    fontSize: 14,
-    color: '#888',
-  },
-  chatButton: {
-    backgroundColor: '#FF3D00',
-    paddingVertical: 5,
-    paddingHorizontal: 15,
+  imageicon: {
+    width: 30,
+    height: 30,
     borderRadius: 5,
   },
-  chatButtonText: {
-    color: '#fff',
+  textContainer: {
+    flex: 1,
+    marginLeft: 10,
+  },
+  productName: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  shopName: {
     fontSize: 14,
-    fontWeight: 'bold',
+    color: "#666",
+  },
+  chatButton: {
+    backgroundColor: "#F31111",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  chatText: {
+    color: "#fff",
+    fontWeight: "bold",
   },
 });
 
