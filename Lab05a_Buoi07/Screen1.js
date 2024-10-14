@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity,Image} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 export default function App() {
@@ -8,6 +8,10 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <Image 
+        source={require('./img/Image 95.png')} 
+        style={styles.image_container}
+      />
       <View style={styles.func}>
           <Text style={styles.text_func}>MANAGE YOUR</Text>
           <Text style={styles.text_func}>TASK</Text>
@@ -34,6 +38,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  image_container:{
+    width:200,
+    height:200,
   },
 
   func: {
