@@ -32,7 +32,7 @@ export default function App() {
       <View style={styles.avatar_icon}>
         <View style={styles.avatar}>
           <View style={styles.avatar_1}>
-            <Image source={require('./img/Avatar 31.png')} />
+            <Image source={require('./img/Avatar31.png')} />
           </View>
           <View style={styles.avatar_2}>
             <Text style={styles.avatar_text_1}>Ho nguyen Cong Hieu</Text>
@@ -40,7 +40,7 @@ export default function App() {
           </View>
         </View>
         <View style={styles.icon}>
-          <Image source={require('./img/Icon Button 12.png')} />
+          <Image source={require('./img/IconButton 12.png')} />
         </View>
       </View>
 
@@ -68,7 +68,7 @@ export default function App() {
 
       <View style={styles.footer}>
         <View style={styles.footer_img}>
-          <Image source={require('./img/Image 95.png')}
+          <Image source={require('./img/Image95.png')}
             style={styles.footer_images}
           />
         </View>

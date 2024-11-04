@@ -9,7 +9,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Image 
-        source={require('./img/Image 95.png')} 
+        source={require('./img/Image95.png')} 
         style={styles.image_container}
       />
       <View style={styles.func}>
